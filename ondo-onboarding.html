@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf5ef">
+<title>ONDO° | 나의 온도 시작하기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fbf5ef;--cream:#f8eae1;--pink:#efd6cc;--rose:#ddb5a6;--terra:#bd7c66;--brown:#754b3e;--ink:#4b3028;--muted:#9b786b;--line:#ead8ce;--white:#fffaf6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#efe5dd;color:var(--ink);font-family:'DM Sans','Noto Sans KR',sans-serif;line-height:1.7}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.page{max-width:1180px;min-height:100vh;margin:auto;background:var(--paper);box-shadow:0 0 44px rgba(89,54,40,.045)}
+header{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(251,245,239,.94)}
+.logo{font:30px 'Playfair Display',serif;letter-spacing:2px;color:#966654;text-decoration:none}
+.logo sup{font-size:11px}
+.header-note{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+main{padding:54px 22px 80px}
+.wrap{max-width:680px;margin:auto}
+.intro{text-align:center;margin-bottom:34px}
+.eyebrow{font-size:10px;letter-spacing:2px;color:var(--terra);text-transform:uppercase;margin-bottom:13px}
+h1,h2{font-family:'Noto Serif KR','Playfair Display',serif;font-weight:400;color:var(--brown)}
+h1{font-size:clamp(32px,5vw,48px);line-height:1.45;letter-spacing:-1.5px;margin:0 0 12px}
+.intro p{font-size:13px;color:#8b6f63;margin:0;line-height:1.9}
+.progress-wrap{margin:30px auto 26px;max-width:520px}
+.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;letter-spacing:1px;margin-bottom:9px}
+.progress{height:3px;background:#efddd4;border-radius:10px;overflow:hidden}
+.progress>span{display:block;width:33.333%;height:100%;background:var(--terra);transition:width .25s}
+.panel{background:rgba(255,250,246,.88);border:1px solid rgba(229,204,191,.85);border-radius:18px;padding:clamp(22px,5vw,38px);box-shadow:0 12px 36px rgba(89,54,40,.055)}
+.step{display:none}
+.step.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
+.step-kicker{font-size:10px;letter-spacing:1.7px;color:var(--terra);margin-bottom:8px}
+h2{font-size:25px;line-height:1.5;margin:0 0 8px}
+.desc{font-size:12px;color:#927467;margin:0 0 25px}
+.field{margin:20px 0}
+label{display:block;font-size:12px;color:#69483c;margin-bottom:8px}
+input,select,textarea{width:100%;border:1px solid #e7d5cb;border-radius:9px;background:#fffdfb;padding:13px 14px;color:var(--ink);font-size:13px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#c58a76;box-shadow:0 0 0 3px rgba(197,138,118,.12)}
+textarea{min-height:100px;resize:vertical}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice span{display:flex;align-items:center;justify-content:center;min-height:54px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fffdfb;color:#76594e;font-size:12px;text-align:center;transition:.18s}
+.choice input:checked+span{border-color:var(--terra);background:#f8e8e0;color:#754b3e;box-shadow:inset 0 0 0 1px var(--terra)}
+.choice span:hover{border-color:#c58a76}
+.helper{font-size:10px;color:#a18175;margin-top:8px}
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:30px}
+.btn{border-radius:999px;padding:13px 22px;font-size:12px;border:1px solid #dfbfb2;background:transparent;color:#805344}
+.btn.primary{background:var(--terra);color:white;border-color:var(--terra);min-width:145px}
+.btn.primary:hover{background:#a96651}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.consent{display:flex;align-items:flex-start;gap:10px;font-size:11px;color:#87695d;line-height:1.8}
+.consent input{width:16px;height:16px;margin-top:3px;accent-color:var(--terra);flex:none}
+.done{text-align:center;padding:16px 4px 8px}
+.done-mark{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;background:#f4dfd5;color:var(--terra);font:34px 'Playfair Display',serif}
+.done p{font-size:12px;color:#8b6f63;line-height:2}
+footer{text-align:center;border-top:1px solid var(--line);padding:25px;color:#a18175;font-size:10px;letter-spacing:.7px}
+@media(max-width:600px){header{height:64px;padding:0 21px}.logo{font-size:26px}.header-note{font-size:9px}main{padding:37px 16px 55px}.intro{margin-bottom:25px}.panel{border-radius:14px}.choice-grid{grid-template-columns:1fr 1fr}.actions .btn{padding:12px 17px}}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <a class="logo" href="#">ONDO<sup>°</sup></a>
+  <div class="header-note">A little closer to your 온도</div>
+</header>
+<main>
+<div class="wrap">
+  <div class="intro">
+    <div class="eyebrow">WELCOME TO ONDO°</div>
+    <h1>나에게 맞는 관계,<br>천천히 시작해 볼까요?</h1>
+    <p>몇 가지 질문에 답하면 나의 연애 취향을 바탕으로<br>더 잘 맞는 사람을 만날 준비가 끝나요.</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="stepLabel">STEP 01 / 03</span><span id="percent">33%</span></div>
+    <div class="progress"><span id="progressBar"></span></div>
+  </div>
+  <section class="panel">
+    <form id="onboardingForm">
+      <div class="step active" data-step="0">
+        <div class="step-kicker">01 · ABOUT YOU</div>
+        <h2>먼저, 당신을 소개해 주세요.</h2>
+        <p class="desc">서로를 알아가기 위한 기본 정보예요.</p>
+        <div class="field"><label for="nickname">닉네임</label><input id="nickname" name="nickname" maxlength="12" placeholder="불리고 싶은 이름" required></div>
+        <div class="field"><label for="age">나이</label><select id="age" name="age" required><option value="">나이를 선택해 주세요</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option></select></div>
+        <div class="field"><label for="region">주 활동 지역</label><select id="region" name="region" required><option value="">지역을 선택해 주세요</option><option>서울</option><option>경기</option><option>인천</option><option>부산</option><option>대구</option><option>대전</option><option>광주</option><option>기타</option></select></div>
+      </div>
+      <div class="step" data-step="1">
+        <div class="step-kicker">02 · YOUR PREFERENCE</div>
+        <h2>어떤 만남을 기대하고 있나요?</h2>
+        <p class="desc">정답은 없어요. 지금 마음에 가까운 것을 골라 주세요.</p>
+        <div class="field"><label>선호하는 관계의 분위기</label><div class="choice-grid">
+          <label class="choice"><input type="radio" name="relationship" value="편안하고 친구 같은"><span>편안하고 친구 같은</span></label>
+          <label class="choice"><input type="radio" name="relationship" value="서로에게 다정한"><span>서로에게 다정한</span></label>
+          <label class="choice"><input type="radio" name="relationship" value="함께 성장하는"><span>함께 성장하는</span></label>
+          <label class="choice"><input type="radio" name="relationship" value="설렘이 가득한"><span>설렘이 가득한</span></label>
+        </div></div>
+        <div class="field"><label>상대와 가장 중요하게 맞았으면 하는 부분</label><div class="choice-grid">
+          <label class="choice"><input type="radio" name="priority" value="대화"><span>대화가 잘 통하는 것</span></label>
+          <label class="choice"><input type="radio" name="priority" value="가치관"><span>가치관과 생각</span></label>
+          <label class="choice"><input type="radio" name="priority" value="생활방식"><span>생활 방식과 리듬</span></label>
+          <label class="choice"><input type="radio" name="priority" value="취향"><span>취향과 관심사</span></label>
+        </div></div>
+        <div class="field"><label for="introText">나를 조금 더 알려주세요 <span class="helper">(선택)</span></label><textarea id="introText" name="intro" maxlength="180" placeholder="좋아하는 것, 주말을 보내는 방법, 나의 성격 등"></textarea></div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="step-kicker">03 · READY TO MEET</div>
+        <h2>이제 만남을 시작할 준비가 되었어요.</h2>
+        <p class="desc">작성한 정보는 프로필을 구성하는 데 사용돼요. 내용을 확인해 주세요.</p>
+        <div id="summary" style="background:#fbf0e9;border:1px solid var(--line);border-radius:12px;padding:18px;font-size:12px;line-height:2;color:#76594e;margin:20px 0"></div>
+        <label class="consent"><input id="agree" type="checkbox" required><span>개인정보 처리 및 서비스 이용에 관한 안내를 확인했으며, 입력한 정보를 프로필 구성에 사용하는 데 동의합니다.</span></label>
+        <p class="helper">실제 서비스에 연결하기 전 개인정보 처리방침과 이용약관 링크를 추가해 주세요.</p>
+      </div>
+      <div class="step" data-step="3">
+        <div class="done">
+          <div class="done-mark">♡</div>
+          <div class="eyebrow">YOU ARE ALL SET</div>
+          <h2>당신의 온도, 이제 시작이에요.</h2>
+          <p>기본 설정이 완료되었어요.<br>나의 연애 온도 테스트를 통해 더 자세히 알아볼까요?</p>
+          <button type="button" class="btn primary" onclick="window.location.href='index.html#quiz'">연애 온도 테스트로 이동 →</button>
+        </div>
+      </div>
+      <div class="actions" id="actions">
+        <button type="button" class="btn" id="backBtn" disabled>이전</button>
+        <button type="button" class="btn primary" id="nextBtn">다음 단계 →</button>
+      </div>
+    </form>
+  </section>
+</div>
+</main>
+<footer>ONDO° · BETTER MATCH, WARMER DAY</footer>
+</div>
+<script>
+const steps=[...document.querySelectorAll('.step')];
+let current=0;
+const form=document.getElementById('onboardingForm');
+const progress=document.getElementById('progressBar');
+const label=document.getElementById('stepLabel');
+const percent=document.getElementById('percent');
+const back=document.getElementById('backBtn');
+const next=document.getElementById('nextBtn');
+const actions=document.getElementById('actions');
+function render(){
+  steps.forEach((step,i)=>step.classList.toggle('active',i===current));
+  const pct=current===3?100:Math.round((current+1)/3*100);
+  progress.style.width=pct+'%';percent.textContent=pct+'%';
+  label.textContent=current===3?'COMPLETE':'STEP 0'+(current+1)+' / 03';
+  back.disabled=current===0;
+  actions.style.display=current===3?'none':'flex';
+  next.textContent=current===2?'시작하기 ♡':'다음 단계 →';
+}
+function validStep(){
+  const active=steps[current];
+  const required=[...active.querySelectorAll('[required]')];
+  for(const el of required){
+    if(el.type==='radio'){
+      if(!active.querySelector('input[name="'+el.name+'"]:checked')){alert('항목을 선택해 주세요.');return false;}
+      continue;
+    }
+    if(!el.checkValidity()){el.reportValidity();return false;}
+  }
+  if(current===1){
+    for(const name of ['relationship','priority']){
+      if(!active.querySelector('input[name="'+name+'"]:checked')){alert('두 항목을 모두 선택해 주세요.');return false;}
+    }
+  }
+  return true;
+}
+function showSummary(){
+ const data=new FormData(form);
+ const safe=s=>String(s||'미입력').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ document.getElementById('summary').innerHTML=
+ `<b>닉네임</b>　${safe(data.get('nickname'))}<br><b>나이</b>　${safe(data.get('age'))}세<br><b>활동 지역</b>　${safe(data.get('region'))}<br><b>관계 분위기</b>　${safe(data.get('relationship'))}<br><b>중요한 부분</b>　${safe(data.get('priority'))}<br><b>소개</b>　${safe(data.get('intro')||'작성하지 않음')}`;
+}
+next.addEventListener('click',()=>{
+ if(!validStep())return;
+ if(current===1)showSummary();
+ if(current===2){
+   const payload=Object.fromEntries(new FormData(form).entries());
+   delete payload.agree;
+   localStorage.setItem('ondo_onboarding_profile',JSON.stringify(payload));
+ }
+ current=Math.min(current+1,3);render();
+});
+back.addEventListener('click',()=>{current=Math.max(0,current-1);render();});
+render();
+</script>
+</body>
+</html>
