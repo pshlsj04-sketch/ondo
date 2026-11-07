@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ONDO° — Find your own 온도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--cream:#fbedeb;--pink:#f9e7e4;--dusty:#e6c9c4;--terra:#d7a79a;--brown:#7a5b52;--muted:#9b8078;--paper:#fffaf7;--line:#ead7d1}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--brown);font-family:'Pretendard','Noto Serif KR',sans-serif;letter-spacing:-.025em}button,input,select{font:inherit}button{cursor:pointer;transition:.2s}.wrap{max-width:1180px;margin:auto;padding:25px 34px}.top{display:flex;justify-content:space-between;align-items:center;padding:8px 0 24px}.logo{font:500 35px 'Playfair Display',serif;letter-spacing:-.07em;color:var(--brown)}.logo span{font-size:23px;vertical-align:top}.top-actions{display:flex;gap:9px}
+.btn{border:1px solid var(--terra);border-radius:999px;padding:13px 24px;background:var(--terra);color:white;font-size:13px;font-weight:600}.btn:hover{background:var(--brown);border-color:var(--brown)}.btn.secondary{background:transparent;color:var(--brown);border-color:#d9bdb5;box-shadow:none}.btn.secondary:hover{background:#fff7f3;border-color:var(--terra)}.btn:disabled{opacity:.5;cursor:not-allowed}
+.hero{padding:55px 5.5% 42px;background:linear-gradient(135deg,#fbedeb,#f8e6e1);border:0;border-radius:0;text-align:left;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.24);right:-120px;top:-180px}.hero .eyebrow{color:var(--terra);letter-spacing:.24em;font-size:10px;font-weight:700}.hero h1{font:400 clamp(54px,8vw,88px)/1.12 'Playfair Display','Noto Serif KR',serif;letter-spacing:-.055em;margin:18px 0 10px;color:var(--brown)}.hero h1 span{color:var(--terra);font-style:normal}.hero .ko{font:400 clamp(21px,3vw,30px)/1.55 'Noto Serif KR',serif;margin:18px 0 12px;letter-spacing:-.06em}.hero p{font:400 15px/2 'Noto Serif KR',serif;color:#8e7169;max-width:650px;margin:0 0 24px;word-break:keep-all}.hero .btn{background:transparent;color:var(--brown);border:1px solid #d8b5ab;padding:16px 31px;font:500 16px 'Noto Serif KR',serif;box-shadow:none}.hero .btn:hover{background:var(--brown);color:#fff;border-color:var(--brown)}
+.hero-photo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 0}.photo-card{height:250px;position:relative;overflow:hidden;border-radius:13px;background:#d8b3a7}.photo-card img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.78) sepia(.12)}.photo-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(66,42,34,.43),transparent 55%)}.photo-card span{position:absolute;z-index:1;left:24px;bottom:22px;color:#fff;font:400 27px/1.25 'Playfair Display','Noto Serif KR',serif}
+.section-kicker{text-align:center;color:var(--terra);font-size:11px;letter-spacing:.28em;margin:80px 0 14px;font-weight:700}.section-title{text-align:center;font:400 clamp(31px,5vw,48px)/1.4 'Noto Serif KR',serif;color:var(--brown);margin:0 0 35px;letter-spacing:-.07em}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0}.tile{height:210px;position:relative;overflow:hidden;border-radius:12px;background:var(--dusty);padding:0;border:0}.tile img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.72) sepia(.12);transition:transform .5s}.tile:hover img{transform:scale(1.04)}.tile:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(66,42,34,.46),transparent 70%)}.tile .tile-copy{position:absolute;z-index:1;left:20px;bottom:19px;color:#fff}.tile h3{font:400 22px 'Noto Serif KR',serif;margin:0 0 5px}.tile p{font:12px 'Noto Serif KR',serif;color:#fff;margin:0;opacity:.92}.brand-note{text-align:center;padding:75px 15px 55px;font:400 24px/1.9 'Noto Serif KR',serif;color:var(--brown);word-break:keep-all}.brand-note em{font:italic 18px 'Playfair Display',serif;color:var(--terra);letter-spacing:.18em;display:block;margin-bottom:12px}
+.panel{max-width:690px;margin:34px auto;padding:clamp(27px,5vw,48px);background:rgba(255,250,247,.92);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 40px rgba(122,91,82,.06)}h2{font:400 34px 'Noto Serif KR',serif;letter-spacing:-.07em;margin:0 0 10px;color:var(--brown)}.sub{color:var(--muted);margin:0 0 30px;line-height:1.9;font:13px 'Noto Serif KR',serif;word-break:keep-all}.eyebrow{color:var(--terra);letter-spacing:.2em;text-transform:uppercase;font-size:10px;font-weight:700}.field{margin:20px 0}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:9px;color:var(--brown)}.field input,.field select{width:100%;padding:15px 16px;border:1px solid #e7d4ce;border-radius:9px;background:#fffaf8;color:var(--brown);outline:none;font-size:14px}.field input:focus,.field select:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(215,167,154,.13)}.field input::placeholder{color:#c2aaa2}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.choice{display:flex;gap:9px;flex-wrap:wrap}.choice label{border:1px solid var(--line);padding:11px 17px;border-radius:999px;cursor:pointer;font-weight:500}.choice input{accent-color:var(--terra)}.choice label:has(input:checked){background:var(--pink);border-color:var(--terra);color:var(--brown)}.notice{background:#f8eeeb;border-left:2px solid var(--terra);padding:14px 16px;font-size:12px;line-height:1.8;color:var(--brown);margin:20px 0 24px}.q{padding:22px 0;border-bottom:1px solid var(--line)}.q p{font-weight:600;line-height:1.75;margin:0 0 16px;font-size:14px;word-break:keep-all}.scale{display:flex;justify-content:space-between;gap:8px}.scale label{flex:1;text-align:center;font-size:10px;color:var(--muted);cursor:pointer}.scale input{display:block;margin:0 auto 8px;accent-color:var(--terra);width:16px;height:16px}.bar{height:6px;background:#f0dfda;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:var(--terra);transition:width .5s}.result{font:400 64px 'Playfair Display',serif;letter-spacing:-.06em;color:var(--terra);margin:24px 0 10px}.footer{text-align:center;color:#b99b92;font-size:10px;letter-spacing:.2em;padding:45px 0 18px}.status{font-size:12px;color:var(--muted);margin-top:14px;min-height:18px;line-height:1.7}.hidden{display:none!important}
+@media(max-width:680px){.wrap{padding:15px 16px}.top{padding:5px 0 18px}.logo{font-size:31px}.hero{padding:42px 23px 28px}.hero h1{font-size:60px}.hero p{font-size:13px}.hero-photo{gap:9px}.photo-card{height:170px;border-radius:9px}.photo-card span{left:13px;bottom:14px;font-size:19px}.grid{grid-template-columns:1fr 1fr;gap:9px}.tile{height:170px;border-radius:9px}.tile h3{font-size:17px}.tile .tile-copy{left:13px;bottom:13px}.brand-note{padding:55px 12px 35px;font-size:19px}.panel{margin:22px auto;padding:26px 20px}h2{font-size:29px}.two{grid-template-columns:1fr}.top-actions{gap:5px}.top-actions .btn{padding:10px 14px;font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="logo">ONDO<span>°</span></div><div class="top-actions"><button class="btn secondary" id="loginTop">로그인</button><button class="btn" id="joinTop">시작하기</button></div></header>
+<main>
+<section id="home">
+<div class="hero"><div class="eyebrow">20–29 DATING CURATION</div><h1>ONDO<span>°</span></h1><div class="ko">조건보다,<br>잘 맞는 사람.</div><p>취향이 같다고 꼭 잘 맞는 건 아니고,<br>다르다고 꼭 맞지 않는 것도 아니니까요.<br>온도는 대화와 가치관, 서로의 생활을 존중하는 방식에서 작은 공통점을 찾아갑니다.</p><button class="btn" id="start">나의 온도 알아보기&nbsp; ↗</button>
+<div class="hero-photo"><div class="photo-card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=85" alt="노을이 지는 바다"><span>오늘의 온도<br>#001</span></div><div class="photo-card"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=85" alt="따뜻한 빛 아래 꽃"><span>Better Match,<br>Warmer Day</span></div></div></div>
+<div class="section-kicker">YOUR ONDO</div><h2 class="section-title">당신의 연애 온도는<br>몇 도일까요?</h2>
+<div class="grid"><article class="tile"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85" alt="따뜻한 커피"><div class="tile-copy"><h3>나와 잘 맞는 온도는?</h3><p>나의 관계 취향 알아보기</p></div></article><article class="tile"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=85" alt="함께 걷는 연인"><div class="tile-copy"><h3>관계의 작은 공통점</h3><p>대화와 가치관을 바탕으로</p></div></article><article class="tile"><img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=900&q=85" alt="분홍빛 꽃"><div class="tile-copy"><h3>서로를 이해하는 방식</h3><p>다름 속에서 발견하는 조화</p></div></article></div>
+<div class="brand-note"><em>BETTER MATCH, WARMER DAY</em>나를 알아가는 것에서 시작해,<br>서로에게 편안한 관계를 찾아갑니다.</div></section>
+<section id="auth" class="panel hidden">
+<h2 id="authTitle">회원가입</h2><p class="sub">계정을 만들고 나의 온도 기록을 저장해 보세요.</p>
+<div class="field"><label>이메일</label><input id="email" type="email" autocomplete="email" placeholder="name@example.com"></div>
+<div class="field"><label>비밀번호</label><input id="password" type="password" autocomplete="new-password" minlength="6" placeholder="6자 이상"></div>
+<button class="btn" id="authSubmit">회원가입</button> <button class="btn secondary" id="toggleAuth">로그인으로 전환</button><div class="status" id="authStatus"></div>
+</section>
+<section id="profile" class="panel hidden">
+<h2>나를 소개해 주세요.</h2><p class="sub">입력한 정보는 계정에 연결해 저장합니다.</p>
+<div class="field"><label>닉네임</label><input id="nickname" maxlength="20" placeholder="불리고 싶은 이름"></div>
+<div class="two"><div class="field"><label>나이 (20~29세)</label><input id="age" type="number" min="20" max="29" placeholder="예: 24"></div><div class="field"><label>성별</label><select id="gender"><option value="">선택해 주세요</option><option value="여성">여성</option><option value="남성">남성</option></select></div></div>
+<div class="field"><label>활동 지역</label><select id="region"><option value="">선택해 주세요</option><option>서울</option><option>경기</option><option>인천</option><option>부산</option><option>대구</option><option>대전</option><option>광주</option><option>울산</option><option>세종</option><option>강원</option><option>충북</option><option>충남</option><option>전북</option><option>전남</option><option>경북</option><option>경남</option><option>제주</option><option>기타</option></select></div>
+<div class="notice">현재 버전은 20~29세만 가입할 수 있으며, 성별 선택지는 여성과 남성으로 제한됩니다.</div>
+<button class="btn" id="saveProfile">프로필 저장하고 테스트 시작</button><div class="status" id="profileStatus"></div>
+</section>
+<section id="quiz" class="panel hidden"><h2>나의 관계 온도</h2><p class="sub">각 문항에 가장 가까운 답을 골라 주세요. 1점은 전혀 아니다, 5점은 매우 그렇다를 의미합니다.</p><div id="questions"></div><button class="btn" id="submitQuiz">결과 확인하기</button><div class="status" id="quizStatus"></div></section>
+<section id="results" class="panel hidden"><div class="eyebrow">YOUR RELATIONSHIP TEMPERATURE</div><h2 id="resultName">나의 온도</h2><div class="result"><span id="score">0</span><small style="font:16px 'DM Sans'"> / 100</small></div><p class="sub" id="resultCopy"></p><div class="field"><label>대화·소통</label><div class="bar"><span id="talkBar"></span></div></div><div class="field"><label>가치관·신뢰</label><div class="bar"><span id="valueBar"></span></div></div><div class="field"><label>일상·데이트</label><div class="bar"><span id="dateBar"></span></div></div><button class="btn" id="retry">다시 테스트하기</button> <button class="btn secondary" id="logout">로그아웃</button><div class="status" id="resultStatus"></div></section>
+</main><footer class="footer">ONDO° · Find your own 온도.</footer>
+</div>
+<script>
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const configured = !SUPABASE_URL.startsWith("YOUR_") && !SUPABASE_ANON_KEY.startsWith("YOUR_");
+const sb = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const sections = ["home","auth","profile","quiz","results"];
+function show(id){sections.forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"});}
+function status(id,msg){document.getElementById(id).textContent=msg;}
+let mode="signup", currentUser=null, profileSaved=false;
+const qs=[
+"상대방과 생각이 다를 때 대화를 통해 조율하는 편이다.","서운한 감정이 생기면 솔직하게 표현할 수 있다.","연락은 양보다 서로 편안한 방식이 중요하다.","상대방의 이야기를 끝까지 듣고 이해하려 한다.","갈등이 생겼을 때 회피하기보다 해결하려 한다.",
+"연애에서도 각자의 개인 시간과 생활을 존중해야 한다.","약속과 신뢰를 지키는 것이 중요하다.","돈과 소비에 대한 가치관이 비슷한 것이 중요하다.","장기적인 관계의 방향에 대해 이야기할 수 있다.","서로의 다름을 인정하고 존중할 수 있다.",
+"함께 특별한 일을 하기보다 평범한 일상을 나누는 것이 좋다.","데이트 계획은 함께 의논하는 편이 좋다.","새로운 장소나 활동을 함께 경험하는 것을 좋아한다.","혼자 보내는 시간과 함께 보내는 시간의 균형이 중요하다.","기념일이나 작은 이벤트를 챙기는 편이다.",
+"상대방에게 고마움과 애정을 자주 표현한다.","관계에서 일관된 태도가 중요하다고 생각한다.","상대방의 목표와 성장을 응원하고 싶다.","문제가 생겼을 때 서로 책임을 나누는 것이 중요하다.","편안하고 안정적인 관계를 오래 만들어 가고 싶다."
+];
+const groups={talk:[0,1,2,3,4,15],value:[5,6,7,8,9,16,17,18,19],date:[10,11,12,13,14]};
+document.getElementById("questions").innerHTML=qs.map((q,i)=>`<div class="q"><p>${i+1}. ${q}</p><div class="scale">${[1,2,3,4,5].map(n=>`<label><input type="radio" name="q${i}" value="${n}">${n}</label>`).join("")}</div></div>`).join("");
+function showAuth(m){mode=m;document.getElementById("authTitle").textContent=m==="signup"?"회원가입":"로그인";document.getElementById("authSubmit").textContent=m==="signup"?"회원가입":"로그인";document.getElementById("toggleAuth").textContent=m==="signup"?"로그인으로 전환":"회원가입으로 전환";show("auth");}
+document.getElementById("start").onclick=()=>showAuth("signup");document.getElementById("joinTop").onclick=()=>showAuth("signup");document.getElementById("loginTop").onclick=()=>showAuth("login");
+document.getElementById("toggleAuth").onclick=()=>showAuth(mode==="signup"?"login":"signup");
+document.getElementById("authSubmit").onclick=async()=>{
+ if(!sb){status("authStatus","Supabase 설정이 아직 필요합니다. 아래 안내 파일의 URL과 공개 anon key를 입력해 주세요.");return;}
+ const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;
+ if(!email||password.length<6){status("authStatus","이메일과 6자 이상의 비밀번호를 입력해 주세요.");return;}
+ status("authStatus","처리 중...");
+ const res=mode==="signup"?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
+ if(res.error){status("authStatus",res.error.message);return;}
+ currentUser=res.data.user;
+ if(mode==="signup"&&!res.data.session){status("authStatus","확인 이메일을 보냈습니다. 이메일 인증 후 로그인해 주세요.");return;}
+ status("authStatus","로그인되었습니다.");await loadProfile();show(profileSaved?"quiz":"profile");
+};
+async function loadProfile(){if(!sb||!currentUser)return;const {data}=await sb.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();profileSaved=!!data;if(data){nickname.value=data.nickname||"";age.value=data.age||"";gender.value=data.gender||"";region.value=data.region||"";}}
+document.getElementById("saveProfile").onclick=async()=>{
+ const n=nickname.value.trim(),a=Number(age.value),g=gender.value,r=region.value;
+ if(!n||a<20||a>29||!Number.isInteger(a)||!["여성","남성"].includes(g)||!r){status("profileStatus","닉네임, 20~29세 나이, 성별, 지역을 모두 확인해 주세요.");return;}
+ if(!sb||!currentUser){status("profileStatus","먼저 Supabase 연결 후 로그인해 주세요.");return;}
+ const {error}=await sb.from("profiles").upsert({id:currentUser.id,nickname:n,age:a,gender:g,region:r,updated_at:new Date().toISOString()});
+ if(error){status("profileStatus",error.message);return;}profileSaved=true;show("quiz");
+};
+document.getElementById("submitQuiz").onclick=async()=>{
+ const answers=qs.map((_,i)=>{const el=document.querySelector(`input[name="q${i}"]:checked`);return el?Number(el.value):null;});
+ if(answers.some(v=>v===null)){status("quizStatus","모든 문항에 답변해 주세요.");return;}
+ const avg=arr=>Math.round(arr.reduce((s,i)=>s+answers[i],0)/arr.length*20);
+ const scores={talk:avg(groups.talk),value:avg(groups.value),date:avg(groups.date)};
+ const total=Math.round((scores.talk+scores.value+scores.date)/3);
+ score.textContent=total;talkBar.style.width=scores.talk+"%";valueBar.style.width=scores.value+"%";dateBar.style.width=scores.date+"%";
+ resultName.textContent=(nickname.value||"나")+"의 관계 온도";
+ resultCopy.textContent=total>=80?"자신의 마음을 잘 이해하고 관계에서 원하는 방향이 비교적 분명한 편이에요.":total>=60?"관계에서 중요하게 여기는 기준을 차근차근 알아가고 있어요.": "나에게 편안한 관계가 무엇인지 탐색해 보는 과정이에요. 정답은 없으니 나의 속도를 존중해 주세요.";
+ if(sb&&currentUser){const {error}=await sb.from("quiz_results").insert({user_id:currentUser.id,answers,scores,total_score:total});status("resultStatus",error?"결과 저장 실패: "+error.message:"테스트 결과가 계정에 저장되었습니다.");}
+ else status("resultStatus","미리보기 모드: Supabase 연결 후 결과가 계정에 저장됩니다.");
+ show("results");
+};
+document.getElementById("retry").onclick=()=>show("quiz");
+document.getElementById("logout").onclick=async()=>{if(sb)await sb.auth.signOut();currentUser=null;profileSaved=false;show("home");};
+if(sb){sb.auth.getSession().then(async({data})=>{if(data.session){currentUser=data.session.user;await loadProfile();}});}
+</script>
+</body></html>
