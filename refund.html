@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>환불 정책 · ONDO</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+.doc h2 { font-size: 20px; margin: 36px 0 10px; }
+.doc p, .doc li { font-size: 15px; color: var(--ink); }
+.doc ol, .doc ul { padding-left: 1.2em; margin: 8px 0; list-style: revert; display: grid; gap: 6px; }
+.draft { background: var(--paper-2); border-radius: 14px; padding: 16px 18px; font-size: 13px; color: var(--ink); margin-bottom: 28px; }
+.ph { color: var(--accent); font-weight: 400; }
+</style>
+</head>
+<body>
+<main class="screen"><div class="wrap"><div class="col wide doc">
+<p class="switch" style="margin:0 0 20px"><a href="index.html" style="color:var(--accent)">← ONDO 홈</a></p>
+<div class="page-head"><h1>환불 정책</h1><p>시행일 <span class="ph">[YYYY.MM.DD]</span></p></div>
+<div class="draft"><b>초안입니다.</b> 서비스를 열기 전에 반드시 법률 전문가의 검토를 받고 <span class="ph">[대괄호]</span> 항목을 실제 내용으로 바꾸세요. 이 초안은 법률 자문이 아니며, 실제 서비스 방식과 다르면 고쳐야 합니다.</div>
+<h2>1. 기본 원칙</h2>
+<p>이용권은 결제 후 곧바로 사용할 수 있는 디지털 서비스입니다. 아래 기준은 예시이며, 실제 정책은 법률 검토를 거쳐 확정하세요.</p>
+<h2>2. 환불 기준 <span class="ph">[확정 필요]</span></h2>
+<ul>
+<li>결제 후 <span class="ph">[7]</span>일 이내이고 이용권을 사용하지 않은 경우(추천 열람, 대화 신청이 없는 경우): 전액 환불</li>
+<li>일부 사용한 경우: <span class="ph">[사용분 공제 기준]</span></li>
+<li>프리미엄(30일): <span class="ph">[남은 기간에 따른 환불 기준]</span></li>
+<li>회사의 사정으로 서비스를 제공하지 못한 경우: 전액 환불</li>
+</ul>
+<h2>3. 환불 방법</h2>
+<p><span data-biz="contact">[이메일 또는 전화번호]</span>로 주문번호와 함께 요청하면 <span class="ph">[영업일 기준 N일]</span> 안에 처리합니다. 결제 취소는 결제수단별 승인 취소 절차에 따라 카드사에서 반영되기까지 시간이 걸릴 수 있습니다.</p>
+<h2>4. 환불이 제한되는 경우</h2>
+<p><span class="ph">[약관 위반으로 이용이 정지된 경우 등 실제 기준을 법률 검토 후 기재]</span></p>
+<p class="hint" style="margin-top:44px"><span data-biz="name">[사업자명]</span> · 대표 <span data-biz="ceo">[대표자명]</span> · 문의 <span data-biz="contact">[이메일 또는 전화번호]</span></p>
+</div></div></main>
+<script src="config.js"></script>
+<script>
+(function () {
+  var B = (window.ONDO_CONFIG || {}).business || {};
+  document.querySelectorAll("[data-biz]").forEach(function (el) { var v = B[el.getAttribute("data-biz")]; if (v) el.textContent = v; });
+})();
+</script>
+</body>
+</html>

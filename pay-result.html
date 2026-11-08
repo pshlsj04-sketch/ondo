@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>결제 확인 · ONDO</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="screen" style="min-height:100vh;display:grid;align-items:center">
+  <div class="wrap"><div class="col" style="text-align:center">
+    <div id="wait"><div class="pulse"></div><h1 style="font-size:26px;font-weight:300">결제를 확인하고 있어요</h1><p style="color:var(--muted);margin-top:10px">창을 닫지 말고 잠시만 기다려주세요.</p></div>
+    <div id="done" hidden><h1 style="font-size:28px;font-weight:300">결제가 완료됐어요</h1><p style="color:var(--muted);margin:12px 0 28px">이용권이 열렸어요. 추천을 확인해보세요.</p><a class="btn" href="index.html?paid=1#result" id="go">추천 보러 가기</a></div>
+    <div id="bad" hidden><h1 style="font-size:28px;font-weight:300" id="bad-h">결제가 완료되지 않았어요</h1><p style="color:var(--muted);margin:12px 0 28px" id="bad-p"></p>
+      <div class="actions" style="justify-content:center"><button class="btn" type="button" id="retry" hidden>다시 확인하기</button><a class="btn line" href="index.html#result">돌아가기</a></div></div>
+  </div></div>
+</main>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+<script>
+(function () {
+  "use strict";
+  var CFG = window.ONDO_CONFIG || {}, $ = function (id) { return document.getElementById(id); };
+  var q = new URLSearchParams(location.search);
+  var paymentKey = q.get("paymentKey"), orderId = q.get("orderId"), amount = Number(q.get("amount"));
+  var MSG = {
+    payment_failed: "카드사 또는 결제사에서 승인되지 않았어요. 다른 결제 수단으로 다시 시도해주세요.",
+    amount_mismatch: "결제 금액이 주문과 달라 처리하지 않았어요. 결제가 되었다면 고객센터로 문의해주세요.",
+    order_closed: "이미 종료된 주문이에요. 처음부터 다시 결제를 시작해주세요.",
+    order_not_found: "주문을 찾지 못했어요. 처음부터 다시 결제를 시작해주세요.",
+    toss_unreachable: "결제 서버에 연결하지 못했어요. 결제가 되었을 수 있으니 '다시 확인하기'를 눌러주세요.",
+    toss_unavailable: "결제 서버가 잠시 응답하지 않아요. 결제가 되었을 수 있으니 '다시 확인하기'를 눌러주세요.",
+    payment_not_done: "결제 상태를 확인하지 못했어요. 고객센터로 문의해주세요.",
+    unauthorized: "로그인이 만료됐어요. 다시 로그인한 뒤 이 페이지를 새로고침해주세요."
+  };
+  function show(which, title, text, retry) {
+    $("wait").hidden = which !== "wait"; $("done").hidden = which !== "done"; $("bad").hidden = which !== "bad";
+    if (which === "bad") { if (title) $("bad-h").textContent = title; $("bad-p").textContent = text || ""; $("retry").hidden = !retry; }
+  }
+  // 결제창에서 닫거나 실패한 경우: 토스가 code, message 를 붙여 돌려보냅니다.
+  if (q.get("code") && !paymentKey) { show("bad", "결제가 완료되지 않았어요", q.get("message") || "결제를 다시 시도해주세요.", false); return; }
+  if (!CFG.supabaseUrl || !window.supabase || !paymentKey || !orderId || !(amount > 0)) { show("bad", "잘못된 접근이에요", "결제 정보를 확인하지 못했어요.", false); return; }
+
+  var sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
+  async function confirm() {
+    show("wait");
+    try {
+      var s = (await sb.auth.getSession()).data.session;
+      if (!s) { show("bad", "로그인이 필요해요", MSG.unauthorized, false); return; }
+      var res = await fetch(CFG.supabaseUrl.replace(/\/+$/, "") + "/functions/v1/payments/confirm", {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + s.access_token },
+        body: JSON.stringify({ paymentKey: paymentKey, orderId: orderId, amount: amount })
+      });
+      var body = await res.json().catch(function () { return {}; });
+      if (res.ok && body.ok) { show("done"); return; }
+      var retry = body.error === "toss_unreachable" || body.error === "toss_unavailable";
+      show("bad", null, MSG[body.error] || body.message || "결제를 확인하지 못했어요. 결제가 되었다면 고객센터로 문의해주세요.", retry);
+    } catch (e) { show("bad", null, MSG.toss_unreachable, true); }
+  }
+  $("retry").addEventListener("click", confirm);
+  confirm();
+})();
+</script>
+</body>
+</html>

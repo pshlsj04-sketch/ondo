@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ONDO</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <button class="logo" id="logo" type="button" aria-label="ONDO 홈">ONDO<sup>°</sup></button>
+    <nav class="links" aria-label="주요 메뉴">
+      <button type="button" data-scroll="s-demo">온도란</button>
+      <button type="button" data-scroll="s-how">진행 방식</button>
+      <button type="button" data-scroll="s-plans">이용권</button>
+      <button type="button" data-scroll="s-faq">자주 묻는 질문</button>
+    </nav>
+    <div class="nav-r">
+      <button class="tbtn" id="nav-login" type="button" data-go="login">로그인</button>
+      <button class="tbtn" id="nav-me" type="button" data-go="my" hidden></button>
+      <button class="btn sm" id="nav-start" type="button">시작하기</button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<main class="view" id="v-home">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="label">20–29 Dating Curation</span>
+        <h1>조건보다,<br><em>잘 맞는</em> 사람.</h1>
+        <p class="sub">대화, 가치관, 연애 스타일. 세 가지가 가까운 사람을 하나의 온도로 찾아드려요. 사진을 넘기는 대신 3분만 내어 주세요.</p>
+        <div class="cta-row">
+          <button class="btn" type="button" data-start>나의 연애 온도 알아보기 <span aria-hidden="true">→</span></button>
+          <small>약 3분 · 테스트는 무료</small>
+        </div>
+        <dl class="facts">
+          <div><dt>20–29세</dt><dd>전용 서비스</dd></div>
+          <div><dt>20문항</dt><dd>약 3분 소요</dd></div>
+          <div><dt>3명</dt><dd>한 번에 추천</dd></div>
+        </dl>
+      </div>
+      <figure class="art" style="margin:0">
+        <div class="ring" aria-hidden="true"></div>
+        <div class="arch" id="arch" role="img" aria-label="노을이 지는 강가에 나란히 앉은 두 사람의 뒷모습 일러스트">
+          <svg viewBox="0 0 460 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky-a)"/><stop offset=".55" style="stop-color:var(--sky-b)"/><stop offset="1" style="stop-color:var(--sky-c)"/></linearGradient>
+              <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--water-a)"/><stop offset="1" style="stop-color:var(--water-b)"/></linearGradient>
+              <radialGradient id="gBloom" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--sun);stop-opacity:.95"/><stop offset=".35" style="stop-color:var(--sun);stop-opacity:.35"/><stop offset="1" style="stop-color:var(--sun);stop-opacity:0"/></radialGradient>
+              <filter id="fBlur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
+            </defs>
+            <rect width="460" height="560" fill="url(#gSky)"/>
+            <circle cx="300" cy="312" r="150" fill="url(#gBloom)"/>
+            <g filter="url(#fBlur)" style="fill:#fff" opacity=".42">
+              <ellipse cx="110" cy="130" rx="100" ry="14"/><ellipse cx="170" cy="150" rx="80" ry="10"/>
+              <ellipse cx="380" cy="200" rx="90" ry="12"/><ellipse cx="330" cy="224" rx="70" ry="8"/>
+              <ellipse cx="90" cy="250" rx="70" ry="9"/>
+            </g>
+            <circle class="s-sun" cx="300" cy="312" r="24"/>
+            <g id="cityFar"></g>
+            <g id="cityNear"></g>
+            <rect x="0" y="352" width="460" height="208" fill="url(#gWater)"/>
+            <g id="glint"></g>
+            <g id="lights"></g>
+            <path d="M0 520 C70 500 130 512 200 506 C290 498 380 506 460 492 L460 560 L0 560Z" class="s-bank"/>
+            <!-- 두 사람 (뒷모습) -->
+            <path d="M250 560 C250 492 268 468 296 462 C328 464 352 488 352 560Z" style="fill:#dcc3b8"/>
+            <path d="M262 420 C254 456 258 494 272 526 L316 526 C322 486 318 446 308 420Z" style="fill:#33201e"/>
+            <circle cx="286" cy="414" r="26" style="fill:#3b2422"/>
+            <path d="M118 560 C118 482 148 446 192 440 C238 444 268 480 268 560Z" style="fill:#5b3b36"/>
+            <rect x="178" y="414" width="26" height="30" rx="10" style="fill:#c79a86"/>
+            <circle cx="191" cy="402" r="30" style="fill:#2a1a19"/>
+            <path d="M166 396 C168 372 188 366 204 368 C222 372 226 392 222 402 C214 386 196 382 166 396Z" style="fill:#1f1312"/>
+          </svg>
+          <div class="grain"></div>
+        </div>
+        <figcaption class="latin">Better Match, Warmer Day</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec paper" id="s-demo">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">What is ONDO</span>
+        <h2>온도는 사람을 많이 보여주지 않습니다.<br>잘 맞는 사람을 보여줍니다.</h2>
+        <p>세 가지 축의 점수가 하나의 온도가 되고, 온도가 가까운 사람이 먼저 추천됩니다. 아래 슬라이더를 직접 움직여 보세요.</p>
+      </div>
+      <div class="demo">
+        <div class="gauge-box">
+          <div id="demo-gauge"></div>
+          <div class="tname" id="demo-name"></div>
+          <p class="tdesc" id="demo-desc"></p>
+        </div>
+        <div class="sliders" id="demo-sliders"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="s-how">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">How it works</span>
+        <h2>가입부터 첫 대화까지,<br>네 걸음이면 충분해요.</h2>
+      </div>
+      <ol class="timeline">
+        <li><span class="when">1분</span><h3>가입하고 프로필 쓰기</h3><p>이메일로 가입하고, 나이·지역·만나고 싶은 상대를 알려주세요.</p></li>
+        <li><span class="when">3분</span><h3>온도 테스트</h3><p>20개 문장에 얼마나 공감하는지 고르면 연애 온도가 나와요.</p></li>
+        <li><span class="when">바로</span><h3>잘 맞는 3명 확인</h3><p>온도 차이가 작은 순서대로 이유와 함께 추천해 드려요.</p></li>
+        <li><span class="when">원할 때</span><h3>대화 신청</h3><p>마음이 가는 분께 관심을 보내고, 서로 수락하면 대화가 열려요.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec paper">
+    <div class="wrap pair">
+      <div class="pair-vis" aria-label="온도 비교 예시">
+        <div class="pair-who">
+          <div><span class="dot-av">나</span><span><b>나</b><small>37.1° · 따뜻한 커피 한 잔</small></span></div>
+          <div><span class="dot-av b">서</span><span><b>서윤</b><small>37.4° · 따뜻한 커피 한 잔</small></span></div>
+        </div>
+        <div class="cmp-row"><small><span>대화</span><span>차이 6</span></small><div class="cmp"><s style="left:72%;width:6%"></s><i style="left:72%"></i><b style="left:78%"></b></div></div>
+        <div class="cmp-row"><small><span>가치관</span><span>차이 3</span></small><div class="cmp"><s style="left:59%;width:3%"></s><i style="left:59%"></i><b style="left:62%"></b></div></div>
+        <div class="cmp-row"><small><span>관계</span><span>차이 12</span></small><div class="cmp"><s style="left:58%;width:12%"></s><i style="left:58%"></i><b style="left:70%"></b></div></div>
+        <div class="pair-score"><strong>88%</strong>온도 맞춤도 (예시)</div>
+      </div>
+      <div class="pair-copy">
+        <span class="label">Matching</span>
+        <h2 style="margin-top:16px">비슷하면 편하고,<br>조금 다르면 설레니까.</h2>
+        <p>온도는 세 영역에서 나와 상대의 거리를 비교합니다. 가장 비슷한 영역은 무엇인지, 이야기해 볼 만한 차이는 어디인지 함께 알려드려요.</p>
+        <p>선호하는 상대 성별과 나이대, 활동 지역도 순서에 반영됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="s-plans">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Plans</span>
+        <h2>테스트는 무료,<br>추천은 필요할 때만.</h2>
+        <p>온도 결과까지는 무료로 볼 수 있어요. 추천 3명의 이야기를 보고 싶을 때 이용권을 선택하세요.</p>
+        <p class="notice" id="beta-banner" hidden style="margin-top:18px">베타 기간에는 추천 3명 열람권을 무료로 열어 드려요. 가입하고 온도 테스트를 마치면 받을 수 있어요.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <h3>무료</h3>
+          <div class="price">0원</div>
+          <p class="for">나의 온도가 궁금할 때</p>
+          <ul>
+            <li>20문항 온도 테스트</li>
+            <li>온도·세 영역 결과</li>
+            <li class="off">추천 3명 상세 열람</li>
+            <li class="off">대화 신청</li>
+          </ul>
+          <button class="btn line block" type="button" data-start>무료로 시작하기</button>
+        </div>
+        <div class="plan">
+          <h3>추천 체험권</h3>
+          <div class="price">3,900원<small>1회</small><small class="save">1명당 3,900원</small></div>
+          <p class="for">가볍게 한 명만 먼저 만나보고 싶을 때</p>
+          <ul>
+            <li>가장 잘 맞는 1명 상세 열람</li>
+            <li>맞춤 이유와 차이 설명</li>
+            <li>대화 신청 1회</li>
+            <li class="off">나머지 2명 열람</li>
+          </ul>
+          <button class="btn line block" type="button" data-start>시작하고 체험하기</button>
+        </div>
+        <div class="plan hot">
+          <h3>추천 열람권 <span class="tag">가장 이득</span></h3>
+          <div class="price">9,900원<small>1회</small><small class="save">1명당 3,300원 · 체험권보다 15% 저렴</small></div>
+          <p class="for">이번 결과로 바로 만나보고 싶을 때</p>
+          <ul>
+            <li>추천 3명 상세 열람</li>
+            <li>맞춤 이유와 차이 설명</li>
+            <li>대화 신청 3회</li>
+          </ul>
+          <button class="btn block" type="button" data-start>시작하고 열람하기</button>
+        </div>
+        <div class="plan">
+          <h3>프리미엄</h3>
+          <div class="price">24,900원<small>/ 30일</small></div>
+          <p class="for">꾸준히 새로운 사람을 만나고 싶을 때</p>
+          <ul>
+            <li>열람권의 모든 기능</li>
+            <li>추천 목록 갱신</li>
+            <li>대화 신청 횟수 제한 없음</li>
+          </ul>
+          <button class="btn line block" type="button" data-start>시작하기</button>
+        </div>
+      </div>
+      <p class="note" id="plan-note">요금은 베타 단계의 예시이며 정식 오픈 시 달라질 수 있어요. 현재 결제는 테스트 모드로만 동작합니다.</p>
+    </div>
+  </section>
+
+  <section class="sec paper" id="s-faq">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">FAQ</span><h2>자주 묻는 질문</h2></div>
+      <div class="faq">
+        <details><summary>온도 테스트는 무료인가요?</summary><p>네. 가입 후 20문항 테스트와 온도 결과, 세 영역 점수는 무료로 확인할 수 있어요.</p></details>
+        <details><summary>추천은 어떤 기준으로 이뤄지나요?</summary><p>대화·가치관·관계 세 영역의 점수 차이가 작은 순서로 추천합니다. 선호하는 성별과 나이대, 같은 활동 지역이면 순서에 반영돼요.</p></details>
+        <details><summary>만 20~29세만 이용할 수 있나요?</summary><p>지금은 20대를 위한 서비스로 운영하고 있어요. 가입할 때 20~29세임에 동의해야 해요.</p></details>
+        <details data-demo><summary>입력한 정보는 어디에 저장되나요?</summary><p>현재 베타 버전에서는 계정과 응답이 이 브라우저에만 저장되고 서버로 전송되지 않아요. 정식 오픈 때는 개인정보 처리방침으로 안내드릴게요.</p></details>
+        <details data-live><summary>입력한 정보는 어떻게 쓰이나요?</summary><p>가입 정보와 응답은 서비스 서버에 저장돼요. 이름과 소개글은 이용권을 연 사람에게만, 연락처는 서로 수락한 상대에게만 보여요. 자세한 내용은 개인정보 처리방침에서 확인할 수 있어요.</p></details>
+        <details data-demo><summary>결제는 실제로 되나요?</summary><p>아직 아니에요. 베타 기간에는 결제 과정을 체험하는 테스트 모드이며 카드 정보를 받거나 청구하지 않습니다.</p></details>
+        <details data-live><summary>결제는 어떻게 이뤄지나요?</summary><p>토스페이먼츠 결제창에서 진행돼요. 카드 정보는 ONDO가 받거나 저장하지 않아요. 환불 기준은 환불 정책에서 확인해주세요.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <div class="box">
+        <div>
+          <h2>당신의 연애 온도는<br>몇 도일까요?</h2>
+          <p>20개의 질문으로 사람을 사랑하는 방식을 알아보세요.</p>
+        </div>
+        <button class="btn" type="button" data-start>무료로 온도 측정하기 <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-top">
+        <span class="logo" style="font-size:22px">ONDO<sup>°</sup></span>
+        <div class="foot-links">
+          <button type="button" data-demo data-soon="이용약관은 정식 오픈 전에 안내드릴게요.">이용약관</button>
+          <button type="button" data-demo data-soon="개인정보 처리방침은 정식 오픈 전에 안내드릴게요.">개인정보 처리방침</button>
+          <button type="button" data-demo data-soon="고객센터는 정식 오픈 전에 열릴 예정이에요.">고객센터</button>
+          <a data-live href="terms.html">이용약관</a>
+          <a data-live href="privacy.html">개인정보 처리방침</a>
+          <a data-live href="refund.html">환불 정책</a>
+        </div>
+      </div>
+      <address id="biz"></address>
+      <p id="foot-note"></p>
+    </div>
+  </footer>
+</main>
+
+<!-- ================= LOGIN ================= -->
+<main class="view screen" id="v-login" hidden>
+  <div class="wrap"><div class="col">
+    <div class="page-head"><h1>다시 만나서<br>반가워요</h1><p>가입한 이메일로 로그인해주세요.</p></div>
+    <form id="login-form" novalidate>
+      <div class="field" id="f-l-email"><label class="l" for="l-email">이메일</label><input type="email" id="l-email" autocomplete="email" placeholder="name@example.com"><div class="err" id="e-l-email" role="alert"></div></div>
+      <div class="field" id="f-l-pw"><label class="l" for="l-pw">비밀번호</label><input type="password" id="l-pw" autocomplete="current-password" placeholder="비밀번호"><div class="err" id="e-l-pw" role="alert"></div></div>
+      <div class="actions"><button class="btn block" type="submit">로그인</button></div>
+    </form>
+    <p class="switch" style="margin-top:18px">비밀번호가 기억나지 않나요?<button type="button" data-go="reset">비밀번호 재설정</button></p>
+    <p class="switch" style="margin-top:8px">아직 계정이 없나요?<button type="button" data-go="signup">회원가입</button></p>
+    <p class="demo-note" data-demo>베타 버전의 계정은 이 브라우저에만 저장되는 체험용입니다.</p>
+  </div></div>
+</main>
+
+<!-- ================= SIGNUP ================= -->
+<main class="view screen" id="v-signup" hidden>
+  <div class="wrap"><div class="col">
+    <ol class="steps"><li aria-current="step">가입</li><li>프로필</li><li>온도 테스트</li><li>결과</li></ol>
+    <div class="page-head"><h1>이메일로<br>시작해요</h1><p>1분이면 끝나요. 가입 후 바로 프로필을 입력합니다.</p></div>
+    <div class="notice" id="signup-done" hidden></div>
+    <form id="signup-form" novalidate>
+      <div class="field" id="f-s-email"><label class="l" for="s-email">이메일</label><input type="email" id="s-email" autocomplete="email" placeholder="name@example.com"><div class="err" id="e-s-email" role="alert"></div></div>
+      <div class="field" id="f-s-pw"><label class="l" for="s-pw">비밀번호</label><input type="password" id="s-pw" autocomplete="new-password" placeholder="영문과 숫자를 포함해 8자 이상"><div class="err" id="e-s-pw" role="alert"></div></div>
+      <div class="field" id="f-s-pw2"><label class="l" for="s-pw2">비밀번호 확인</label><input type="password" id="s-pw2" autocomplete="new-password" placeholder="한 번 더 입력"><div class="err" id="e-s-pw2" role="alert"></div></div>
+      <div class="terms" id="terms">
+        <label class="all"><input type="checkbox" id="t-all"> 전체 동의</label>
+        <label><input type="checkbox" id="t-age" class="t"> <span><span class="req">필수</span>만 20~29세이며 이용약관에 동의합니다</span></label>
+        <label><input type="checkbox" id="t-priv" class="t"> <span><span class="req">필수</span>개인정보 수집·이용에 동의합니다</span></label>
+        <label><input type="checkbox" id="t-mkt" class="t"> <span>(선택) 새 추천과 소식을 받아볼게요</span></label>
+      </div>
+      <div class="field" id="f-s-terms" style="margin:-14px 0 18px"><div class="err" id="e-s-terms" role="alert"></div></div>
+      <div class="actions"><button class="btn block" type="submit">가입하고 계속하기</button></div>
+    </form>
+    <p class="switch">이미 계정이 있나요?<button type="button" data-go="login">로그인</button></p>
+    <p class="demo-note" data-demo>베타 버전의 계정은 이 브라우저에만 저장되는 체험용이며, 비밀번호는 해시로만 보관됩니다.</p>
+  </div></div>
+</main>
+
+<!-- ================= RESET ================= -->
+<main class="view screen" id="v-reset" hidden>
+  <div class="wrap"><div class="col">
+    <div id="reset-ask">
+      <div class="page-head"><h1>비밀번호를<br>다시 정해요</h1><p>가입한 이메일로 재설정 링크를 보내드려요.</p></div>
+      <form id="reset-form" novalidate>
+        <div class="field" id="f-r-email"><label class="l" for="r-email">이메일</label><input type="email" id="r-email" autocomplete="email" placeholder="name@example.com"><div class="err" id="e-r-email" role="alert"></div></div>
+        <div class="actions"><button class="btn block" type="submit">재설정 메일 보내기</button></div>
+      </form>
+      <div class="notice" id="reset-sent" hidden style="margin-top:20px"></div>
+      <p class="switch"><button type="button" data-go="login" style="padding:0">로그인으로 돌아가기</button></p>
+    </div>
+    <div id="reset-new" hidden>
+      <div class="page-head"><h1>새 비밀번호를<br>입력해주세요</h1><p>영문과 숫자를 포함해 8자 이상이어야 해요.</p></div>
+      <form id="newpw-form" novalidate>
+        <div class="field" id="f-n-pw"><label class="l" for="n-pw">새 비밀번호</label><input type="password" id="n-pw" autocomplete="new-password"><div class="err" id="e-n-pw" role="alert"></div></div>
+        <div class="field" id="f-n-pw2"><label class="l" for="n-pw2">새 비밀번호 확인</label><input type="password" id="n-pw2" autocomplete="new-password"><div class="err" id="e-n-pw2" role="alert"></div></div>
+        <div class="actions"><button class="btn block" type="submit">비밀번호 바꾸기</button></div>
+      </form>
+    </div>
+  </div></div>
+</main>
+
+<!-- ================= PROFILE ================= -->
+<main class="view screen" id="v-profile" hidden>
+  <div class="wrap"><div class="col">
+    <ol class="steps"><li class="done">가입</li><li aria-current="step">프로필</li><li>온도 테스트</li><li>결과</li></ol>
+    <div class="page-head"><h1>어떤 분을<br>만나고 싶으세요?</h1><p>추천할 때 필요한 정보만 받아요.</p></div>
+    <form id="profile-form" novalidate>
+      <div class="field" id="f-nick"><label class="l" for="nick">닉네임</label><input type="text" id="nick" maxlength="10" autocomplete="nickname" placeholder="2~10자"><div class="err" id="e-nick" role="alert"></div></div>
+      <div class="row2">
+        <div class="field" id="f-age"><label class="l" for="age">나이</label><select id="age" required><option value="">선택해주세요</option></select><div class="err" id="e-age" role="alert"></div></div>
+        <div class="field" id="f-gender"><label class="l" for="gender">성별</label>
+          <select id="gender" required>
+            <option value="">선택해주세요</option>
+            <option value="여성">여성</option>
+            <option value="남성">남성</option>
+          </select><div class="err" id="e-gender" role="alert"></div></div>
+      </div>
+      <div class="row2">
+        <div class="field" id="f-seek"><label class="l" for="seek">만나고 싶은 상대</label>
+          <select id="seek" required><option value="">선택해주세요</option><option value="여성">여성</option><option value="남성">남성</option><option value="모두">상관없어요</option></select><div class="err" id="e-seek" role="alert"></div></div>
+        <div class="field" id="f-region"><label class="l" for="region">활동 지역</label><select id="region" required><option value="">선택해주세요</option></select><div class="err" id="e-region" role="alert"></div></div>
+      </div>
+      <div class="row2">
+        <div class="field" id="f-amin"><label class="l" for="amin">선호 나이 (최소)</label><select id="amin"></select></div>
+        <div class="field" id="f-amax"><label class="l" for="amax">선호 나이 (최대)</label><select id="amax"></select><div class="err" id="e-amax" role="alert"></div></div>
+      </div>
+      <div class="field" id="f-bio"><label class="l" for="bio">한 줄 소개</label><textarea class="in" id="bio" maxlength="120" rows="3" placeholder="요즘 좋아하는 것, 만나고 싶은 사람을 편하게 적어주세요. (10~120자)"></textarea><div class="count"><span id="bio-n">0</span> / 120</div><div class="err" id="e-bio" role="alert"></div></div>
+      <div class="field" id="f-contact"><label class="l" for="contact">연락 방법</label><input type="text" id="contact" maxlength="120" autocomplete="off" placeholder="카카오톡 오픈채팅 링크 또는 인스타그램 아이디"><div class="hint">서로 대화를 수락한 상대에게만 공개돼요. 다른 사람에게는 보이지 않아요.</div><div class="err" id="e-contact" role="alert"></div></div>
+      <div class="actions" style="margin-top:12px"><button class="btn block" type="submit">온도 테스트 시작하기 <span aria-hidden="true">→</span></button></div>
+    </form>
+  </div></div>
+</main>
+
+<!-- ================= TEST ================= -->
+<main class="view screen" id="v-test" hidden>
+  <div class="wrap"><div class="col">
+    <div id="t-main">
+      <div class="prog"><i id="t-bar"></i></div>
+      <div class="prog-meta"><span id="t-count">1 / 20</span><span>정답은 없어요</span></div>
+      <div class="q-dim" id="t-dim">대화</div>
+      <h2 class="q" id="t-q"></h2>
+      <div class="scale" id="t-scale" role="group" aria-label="답변 선택">
+        <button type="button" data-v="1" aria-label="전혀 아니다" aria-pressed="false"></button>
+        <button type="button" data-v="2" aria-label="아닌 편이다" aria-pressed="false"></button>
+        <button type="button" data-v="3" aria-label="보통이다" aria-pressed="false"></button>
+        <button type="button" data-v="4" aria-label="그런 편이다" aria-pressed="false"></button>
+        <button type="button" data-v="5" aria-label="매우 그렇다" aria-pressed="false"></button>
+      </div>
+      <div class="scale-l"><span>전혀 아니다</span><span>매우 그렇다</span></div>
+      <div class="test-nav">
+        <button class="btn line sm" type="button" id="t-prev">이전</button>
+        <button class="btn line sm" type="button" id="t-next">다음</button>
+      </div>
+      <p class="hint" style="margin-top:28px">키보드 1~5로도 답할 수 있어요.</p>
+    </div>
+    <div class="wait" id="t-wait" hidden><div class="pulse"></div><p>온도를 재고 있어요</p></div>
+  </div></div>
+</main>
+
+<!-- ================= RESULT ================= -->
+<main class="view screen" id="v-result" hidden>
+  <div class="wrap"><div class="col wide">
+    <ol class="steps"><li class="done">가입</li><li class="done">프로필</li><li class="done">온도 테스트</li><li aria-current="step">결과</li></ol>
+    <section class="res-top">
+      <p class="who" id="r-who"></p>
+      <div id="r-gauge"></div>
+      <h1 id="r-type"></h1>
+      <p class="desc" id="r-desc"></p>
+    </section>
+    <section class="dim-list" id="r-dims"></section>
+    <section class="res-sec">
+      <h2 id="r-title">잘 맞는 온도의 사람들</h2>
+      <p data-demo>데모용 예시 프로필이며 실제 사람에게 전달되지 않아요.</p>
+      <div class="cands" id="r-cands"></div>
+      <div class="empty" id="r-empty" hidden></div>
+      <div class="lock-panel" id="r-lock" hidden>
+        <h3 id="r-lock-h">추천 3명의 이야기가 궁금하다면</h3>
+        <p id="r-lock-p">이용권을 선택하면 소개글과 맞춤 이유, 대화 신청을 열어 드려요.</p>
+        <button class="btn" type="button" id="r-unlock">이용권 보기</button>
+      </div>
+    </section>
+    <div class="actions">
+      <button class="btn line" type="button" id="r-copy">결과 복사하기</button>
+      <button class="btn line" type="button" id="r-retry">다시 측정하기</button>
+    </div>
+    <textarea class="sharebox" id="r-share" readonly hidden aria-label="복사할 결과 문구"></textarea>
+  </div></div>
+</main>
+
+<!-- ================= MY ================= -->
+<main class="view screen" id="v-my" hidden>
+  <div class="wrap"><div class="col">
+    <div class="page-head"><h1 id="m-hello">내 정보</h1><p>계정과 이용권을 확인하고 관리해요.</p></div>
+    <h2 class="sec-h" id="m-inbox-h">받은 대화 신청</h2>
+    <div class="cands" id="m-inbox"></div>
+    <h2 class="sec-h">성사된 매칭</h2>
+    <div class="cands" id="m-matches" style="margin-bottom:12px"></div>
+    <h2 class="sec-h">내 정보</h2>
+    <dl class="kv" id="m-kv"></dl>
+    <div class="actions" style="margin-bottom:34px">
+      <button class="btn" type="button" id="m-result">내 결과 보기</button>
+      <button class="btn line" type="button" id="m-edit">프로필 수정</button>
+      <button class="btn line" type="button" id="m-buy">이용권 보기</button>
+    </div>
+    <div class="actions">
+      <button class="btn line sm" type="button" id="m-logout">로그아웃</button>
+      <button class="btn line sm" type="button" id="m-delete">계정 삭제</button>
+    </div>
+  </div></div>
+</main>
+
+<!-- ================= PAYMENT SHEET ================= -->
+<div class="scrim" id="pay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+    <button class="x" type="button" id="pay-x" aria-label="닫기">×</button>
+    <div id="pay-step1">
+      <h2 id="pay-title">이용권 선택</h2>
+      <p id="pay-sub">추천 3명의 소개글과 맞춤 이유를 열어봐요.</p>
+      <div id="pay-opts"></div>
+      <div class="field" style="margin:20px 0 0" data-demo><label class="l" for="paym">결제 수단</label>
+        <select id="paym"><option>신용·체크카드</option><option>카카오페이</option><option>토스페이</option><option>네이버페이</option></select></div>
+      <div class="testmode" id="pay-note"></div>
+      <button class="btn block" type="button" id="pay-go">결제 진행</button>
+    </div>
+    <div id="pay-step2" hidden>
+      <h2>결제 수단</h2>
+      <p id="pay-sum"></p>
+      <div id="toss-methods"></div>
+      <div id="toss-agree"></div>
+      <div class="actions" style="margin-top:16px"><button class="btn block" type="button" id="pay-final">결제하기</button></div>
+      <p class="switch" style="margin-top:14px"><button type="button" id="pay-back" style="padding:0">이용권 다시 고르기</button></p>
+    </div>
+    <div class="paywait" id="pay-wait" hidden><div class="pulse"></div><p id="pay-wait-t">결제창을 연결하고 있어요</p></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+<script src="data.js"></script>
+<script src="api-demo.js"></script>
+<script src="api-live.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
