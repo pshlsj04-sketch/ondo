@@ -369,7 +369,8 @@
 
     if (rec.total === 0) {
       var em = $("r-empty"); em.hidden = false;
-      em.textContent = "아직 " + p.nick + "님과 조건이 맞는 분이 없어요. 새 회원이 가입하면 이곳에 나타나요. 추천할 분이 생기기 전에는 결제하지 않아도 돼요.";
+      em.textContent = "아직 " + p.nick + "님과 조건이 맞는 분이 없어요. 새 회원이 가입하면 이곳에 나타나요. "
+        + (S.beta ? "추천할 분이 생기면 이 화면에서 \"무료로 열어보기\"를 눌러 바로 볼 수 있어요." : "추천할 분이 생기기 전에는 결제하지 않아도 돼요.");
       return;
     }
     var pass = me.pass, picks = pass ? pass.picks : 0;
