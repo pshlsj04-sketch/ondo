@@ -97,7 +97,11 @@
         inboxCount: inc ? inc.length : 0
       });
     },
-    saveProfile: function (p) { need(); d.profile = p; save(); return Promise.resolve(); },
+    saveProfile: function (p) {
+      need();
+      if (!p.consent && !(d.profile && d.profile.consent)) return Promise.reject(err("'만나고 싶은 상대' 정보 수집·이용에 동의해주세요.", "consent_required"));
+      p.consent = true; d.profile = p; save(); return Promise.resolve();
+    },
     submitResult: function (dims) {
       need(); d.result = { dims: dims, temp: O.tempOf(dims) }; save();
       return Promise.resolve(d.result);

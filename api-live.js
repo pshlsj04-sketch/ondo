@@ -19,7 +19,8 @@
     order_closed: "이미 종료된 주문이에요. 다시 결제를 시작해주세요.",
     amount_mismatch: "결제 금액이 달라 처리하지 않았어요.",
     beta_closed: "무료 이용권 이벤트가 끝났어요. 새로고침하면 이용권 결제를 이용할 수 있어요.",
-    already_active: "이미 이용권이 열려 있어요."
+    already_active: "이미 이용권이 열려 있어요.",
+    consent_required: "'만나고 싶은 상대' 정보 수집·이용에 동의해주세요."
   };
   function rawOf(e) {
     // DB 오류는 code(P0001 등)가 아니라 message 에 우리가 던진 코드가 들어 있습니다.
@@ -98,7 +99,7 @@
         });
       },
       saveProfile: function (p) {
-        return rpc("save_profile", { p_nick: p.nick, p_age: p.age, p_gender: p.gender, p_seek: p.seek, p_region: p.region, p_amin: p.amin, p_amax: p.amax, p_bio: p.bio, p_contact: p.contact });
+        return rpc("save_profile", { p_nick: p.nick, p_age: p.age, p_gender: p.gender, p_seek: p.seek, p_region: p.region, p_amin: p.amin, p_amax: p.amax, p_bio: p.bio, p_contact: p.contact, p_consent: !!p.consent });
       },
       submitResult: function (dims) {
         return rpc("submit_result", { p_d0: dims[0], p_d1: dims[1], p_d2: dims[2] }).then(function (r) {

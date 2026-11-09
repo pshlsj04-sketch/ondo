@@ -18,7 +18,7 @@
 <main class="screen"><div class="wrap"><div class="col wide doc">
 <p class="switch" style="margin:0 0 20px"><a href="index.html" style="color:var(--accent)">← ONDO 홈</a></p>
 <div class="page-head"><h1>환불 정책</h1><p>시행일 <span class="ph">[YYYY.MM.DD]</span></p></div>
-<div class="draft"><b>초안입니다.</b> 서비스를 열기 전에 반드시 법률 전문가의 검토를 받고 <span class="ph">[대괄호]</span> 항목을 실제 내용으로 바꾸세요. 이 초안은 법률 자문이 아니며, 실제 서비스 방식과 다르면 고쳐야 합니다.</div>
+<div class="draft" id="draft" hidden><b>초안입니다.</b> 서비스를 열기 전에 반드시 법률 전문가의 검토를 받고 <span class="ph">[대괄호]</span> 항목을 실제 내용으로 바꾸세요. 이 초안은 법률 자문이 아니며, 실제 서비스 방식과 다르면 고쳐야 합니다.</div>
 <h2>1. 기본 원칙</h2>
 <p>이용권은 결제 후 곧바로 사용할 수 있는 디지털 서비스입니다. 아래 기준은 예시이며, 실제 정책은 법률 검토를 거쳐 확정하세요.</p>
 <h2>2. 환불 기준 <span class="ph">[확정 필요]</span></h2>
@@ -38,6 +38,7 @@
 <script>
 (function () {
   var B = (window.ONDO_CONFIG || {}).business || {};
+  var dr = document.getElementById("draft"); if (dr && !B.contact) dr.hidden = false;  // 운영자에게만 필요한 안내라 연락처를 채우면 사라져요
   document.querySelectorAll("[data-biz]").forEach(function (el) { var v = B[el.getAttribute("data-biz")]; if (v) el.textContent = v; });
 })();
 </script>

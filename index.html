@@ -295,6 +295,7 @@
         <div class="actions"><button class="btn block" type="submit">재설정 메일 보내기</button></div>
       </form>
       <div class="notice" id="reset-sent" hidden style="margin-top:20px"></div>
+      <p class="hint" id="reset-help" hidden style="margin-top:16px"></p>
       <p class="switch"><button type="button" data-go="login" style="padding:0">로그인으로 돌아가기</button></p>
     </div>
     <div id="reset-new" hidden>
@@ -329,6 +330,10 @@
           <select id="seek" required><option value="">선택해주세요</option><option value="여성">여성</option><option value="남성">남성</option><option value="모두">상관없어요</option></select><div class="err" id="e-seek" role="alert"></div></div>
         <div class="field" id="f-region"><label class="l" for="region">활동 지역</label><select id="region" required><option value="">선택해주세요</option></select><div class="err" id="e-region" role="alert"></div></div>
       </div>
+      <div class="terms" id="sens-terms">
+        <label><input type="checkbox" id="t-sens"> <span><span class="req">필수</span>'만나고 싶은 상대' 정보의 수집·이용에 동의합니다. 성적 지향을 드러낼 수 있는 민감정보라서 따로 동의를 받아요. 추천 상대를 고르는 데에만 쓰고 다른 회원에게는 보여주지 않아요. <a href="privacy.html#sensitive" target="_blank" rel="noopener">자세히 보기</a></span></label>
+      </div>
+      <div class="field" id="f-sens" style="margin:-14px 0 18px"><div class="err" id="e-sens" role="alert"></div></div>
       <div class="row2">
         <div class="field" id="f-amin"><label class="l" for="amin">선호 나이 (최소)</label><select id="amin"></select></div>
         <div class="field" id="f-amax"><label class="l" for="amax">선호 나이 (최대)</label><select id="amax"></select><div class="err" id="e-amax" role="alert"></div></div>

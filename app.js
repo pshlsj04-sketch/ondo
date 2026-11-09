@@ -221,12 +221,19 @@
     amin.value = "20"; amax.value = "29";
     O.REGIONS.forEach(function (r) { $("region").appendChild(h("option", { value: r, text: r })); });
   })();
+  // 메일이 안 갈 때를 대비한 안내 (문의 연락처를 config.js 에 적으면 나타나요)
+  (function () {
+    var B = CFG.business || {}, hp = $("reset-help");
+    if (LIVE && B.contact && hp) { hp.textContent = "메일이 오지 않으면 " + B.contact + " 로 가입한 이메일 주소를 알려주세요. 확인 후 도와드릴게요."; hp.hidden = false; }
+  })();
   wireClear(["nick", "age", "gender", "seek", "region", "bio", "contact"]);
+  $("t-sens").addEventListener("change", function () { setErr("sens"); });
   $("bio").addEventListener("input", function () { $("bio-n").textContent = String($("bio").value.length); });
   $("amin").addEventListener("change", function () { setErr("amax"); });
   $("amax").addEventListener("change", function () { setErr("amax"); });
   function fillProfile() {
     var p = S.me && S.me.profile; if (!p) return;
+    $("t-sens").checked = true; // 프로필이 있다는 것은 이미 동의했다는 뜻이에요 (서버가 동의 없이는 저장하지 않아요)
     $("nick").value = p.nick; $("age").value = String(p.age); $("gender").value = p.gender;
     $("seek").value = p.seek; $("region").value = p.region; $("amin").value = String(p.amin); $("amax").value = String(p.amax);
     $("bio").value = p.bio || ""; $("contact").value = p.contact || ""; $("bio-n").textContent = String(($("bio").value || "").length);
@@ -234,18 +241,19 @@
   $("profile-form").addEventListener("submit", function (e) {
     e.preventDefault();
     var form = e.target, nick = $("nick").value.trim(), bio = $("bio").value.trim(), contact = $("contact").value.trim(), ok = true, first = null;
-    ["nick", "age", "gender", "seek", "region", "amax", "bio", "contact"].forEach(function (i) { setErr(i); });
+    ["nick", "age", "gender", "seek", "sens", "region", "amax", "bio", "contact"].forEach(function (i) { setErr(i); });
     function bad(id, m, el) { setErr(id, m); ok = false; if (!first) first = el; }
     if (nick.length < 2 || nick.length > 10) bad("nick", "닉네임은 2~10자로 입력해주세요.", $("nick"));
     if (!$("age").value) bad("age", "나이를 선택해주세요.", $("age"));
     if (!$("gender").value) bad("gender", "성별을 선택해주세요.", $("gender"));
     if (!$("seek").value) bad("seek", "만나고 싶은 상대를 선택해주세요.", $("seek"));
+    if (!$("t-sens").checked) bad("sens", "'만나고 싶은 상대' 정보 수집·이용에 동의해주세요.", $("t-sens"));
     if (!$("region").value) bad("region", "활동 지역을 선택해주세요.", $("region"));
     if (Number($("amin").value) > Number($("amax").value)) bad("amax", "최대 나이는 최소 나이보다 크거나 같아야 해요.", $("amax"));
     if (bio.length < 10 || bio.length > 120) bad("bio", "소개글은 10~120자로 적어주세요.", $("bio"));
     if (contact.length < 3) bad("contact", "연락 방법을 입력해주세요.", $("contact"));
     if (!ok) { first.focus(); return; }
-    var p = { nick: nick, age: Number($("age").value), gender: $("gender").value, seek: $("seek").value, region: $("region").value, amin: Number($("amin").value), amax: Number($("amax").value), bio: bio, contact: contact };
+    var p = { nick: nick, age: Number($("age").value), gender: $("gender").value, seek: $("seek").value, region: $("region").value, amin: Number($("amin").value), amax: Number($("amax").value), bio: bio, contact: contact, consent: $("t-sens").checked };
     busy(submitBtn(form), async function () {
       try { await API.saveProfile(p); await refreshMe(); go(S.me.result ? "result" : "test"); } catch (err) { fail(err); }
     });
