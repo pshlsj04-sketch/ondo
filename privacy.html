@@ -62,10 +62,10 @@
 <h2>7. 안전성 확보 조치</h2>
 <p>회사는 접근 권한 최소화, 데이터베이스 접근 통제(브라우저가 표를 직접 읽지 못하고 정해진 기능으로만 접근), 비밀번호 암호화, 전송 구간 암호화(HTTPS) 등의 조치를 합니다.</p>
 <h2>8. 개인정보 보호책임자</h2>
-<p>성명 <span data-biz="ceo">[이름]</span> · 연락처 <span data-biz="contact">[이메일 또는 전화번호]</span></p>
+<p>책임자(부서) <span data-biz="privacyOfficer">[이름 또는 부서명]</span> · 연락처 <span data-biz="contact">[이메일 또는 전화번호]</span></p>
 <h2>9. 방침의 변경</h2>
 <p>내용이 바뀌면 시행 <span class="ph">[7]</span>일 전에 서비스 화면에 알립니다.</p>
-<p class="hint" style="margin-top:44px"><span data-biz="name">[사업자명]</span> · 대표 <span data-biz="ceo">[대표자명]</span> · 문의 <span data-biz="contact">[이메일 또는 전화번호]</span></p>
+<p class="hint" id="biz-line" style="margin-top:44px"><span data-biz="name">[사업자명]</span> · 대표 <span data-biz="ceo">[대표자명]</span> · 문의 <span data-biz="contact">[이메일 또는 전화번호]</span></p>
 </div></div></main>
 <script src="config.js"></script>
 <script>
@@ -73,6 +73,7 @@
   var B = (window.ONDO_CONFIG || {}).business || {};
   var dr = document.getElementById("draft"); if (dr && !B.contact) dr.hidden = false;  // 운영자에게만 필요한 안내라 연락처를 채우면 사라져요
   document.querySelectorAll("[data-biz]").forEach(function (el) { var v = B[el.getAttribute("data-biz")]; if (v) el.textContent = v; });
+  var bl = document.getElementById("biz-line"); if (bl && !B.regNo) bl.textContent = (B.name || "ONDO") + " · 현재 베타 운영 중" + (B.contact ? " · 문의 " + B.contact : "");  // 사업자등록 전에는 빈 칸 대신 운영 상태만
 })();
 </script>
 </body>

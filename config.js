@@ -15,12 +15,15 @@ window.ONDO_CONFIG = {
   freeBeta: false,
 
   // 사이트 하단과 약관에 표시되는 사업자 정보. 통신판매업 신고 후 실제 값으로 바꾸세요.
+  // 사업자등록 전에는 name 과 contact 만 채워 두면, 하단에 "현재 베타 운영 중 · 문의 ..." 로만 표시돼요.
+  // regNo(사업자등록번호)를 채우면 상호·대표·신고번호·주소가 모두 나타나니, 그때 나머지도 채우세요.
   business: {
-    name: "",         // 상호
-    ceo: "",          // 대표자
-    regNo: "",        // 사업자등록번호
-    mailOrderNo: "",  // 통신판매업 신고번호
-    address: "",      // 사업장 주소
-    contact: ""       // 고객센터 이메일 또는 전화번호
+    name: "ONDO 운영팀",           // 상호 (사업자등록 후 실제 상호로)
+    ceo: "",                       // 대표자
+    regNo: "",                     // 사업자등록번호
+    mailOrderNo: "",               // 통신판매업 신고번호
+    address: "",                   // 사업장 주소
+    contact: "37.5ondo@gmail.com", // 고객센터·문의 이메일 또는 전화번호
+    privacyOfficer: "ONDO 운영팀"  // 개인정보 보호책임자 (이름 또는 부서명)
   }
 };

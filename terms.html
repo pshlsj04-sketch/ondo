@@ -51,7 +51,7 @@
 <p>회사는 회원 사이의 만남과 그 결과에 개입하지 않으며, 회원이 입력한 정보의 정확성을 보증하지 않습니다. 회사의 고의 또는 과실로 회원에게 손해가 생긴 경우에는 관련 법령에 따라 책임을 집니다.</p>
 <h2>제8조 (약관의 변경과 분쟁)</h2>
 <p>약관을 바꿀 때에는 시행 <span class="ph">[7]</span>일 전에 서비스 화면에 알립니다. 분쟁은 대한민국 법을 따르며, 관할 법원은 <span class="ph">[관할 법원]</span>으로 합니다.</p>
-<p class="hint" style="margin-top:44px"><span data-biz="name">[사업자명]</span> · 대표 <span data-biz="ceo">[대표자명]</span> · 문의 <span data-biz="contact">[이메일 또는 전화번호]</span></p>
+<p class="hint" id="biz-line" style="margin-top:44px"><span data-biz="name">[사업자명]</span> · 대표 <span data-biz="ceo">[대표자명]</span> · 문의 <span data-biz="contact">[이메일 또는 전화번호]</span></p>
 </div></div></main>
 <script src="config.js"></script>
 <script>
@@ -59,6 +59,7 @@
   var B = (window.ONDO_CONFIG || {}).business || {};
   var dr = document.getElementById("draft"); if (dr && !B.contact) dr.hidden = false;  // 운영자에게만 필요한 안내라 연락처를 채우면 사라져요
   document.querySelectorAll("[data-biz]").forEach(function (el) { var v = B[el.getAttribute("data-biz")]; if (v) el.textContent = v; });
+  var bl = document.getElementById("biz-line"); if (bl && !B.regNo) bl.textContent = (B.name || "ONDO") + " · 현재 베타 운영 중" + (B.contact ? " · 문의 " + B.contact : "");  // 사업자등록 전에는 빈 칸 대신 운영 상태만
 })();
 </script>
 </body>

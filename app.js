@@ -633,9 +633,15 @@
   (function footer() {
     var B = CFG.business || {}, f = function (v, ph) { return v || ph; };
     $("biz").textContent = "";
+    if (LIVE && !B.regNo) {
+      // 사업자등록 전: 빈 칸(대괄호)을 보여주지 않고 운영 상태와 문의처만 알려요.
+      $("biz").appendChild(document.createTextNode((B.name || "ONDO") + " · 현재 베타 운영 중"));
+      if (B.contact) { $("biz").appendChild(document.createElement("br")); $("biz").appendChild(document.createTextNode("문의 " + B.contact)); }
+    } else {
     $("biz").appendChild(document.createTextNode(f(B.name, "[사업자명]") + " · 대표 " + f(B.ceo, "[대표자명]") + " · 사업자등록번호 " + f(B.regNo, "[000-00-00000]") + " · 통신판매업신고 " + f(B.mailOrderNo, "[제0000-지역-0000호]")));
     $("biz").appendChild(document.createElement("br"));
     $("biz").appendChild(document.createTextNode(f(B.address, "[사업장 주소]") + " · 고객센터 " + f(B.contact, "[이메일 또는 전화번호]")));
+    }
     $("foot-note").textContent = LIVE ? "" : "베타 테스트 중 · 추천 후보는 예시 프로필이며, 대괄호 항목은 운영 전에 실제 정보로 바꿔야 해요.";
     if (LIVE) $("plan-note").textContent = IS_TEST_KEY ? "현재 결제 테스트 중이라 실제로 청구되지 않아요." : "";
     $("plan-note").hidden = !$("plan-note").textContent;
